@@ -1,5 +1,6 @@
 
 
-async def handle_text_message(message: str, openai_client):
-    response = openai_client.text_chat(message)
-    return response
+async def handle_text_message(message: str, client):
+    response = await client.text_chat(message)
+    return  response
+
