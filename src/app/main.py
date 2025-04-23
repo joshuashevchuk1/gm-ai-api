@@ -16,6 +16,8 @@ class GmAiApp:
             title="GM Base API",
             description="A modular FastAPI app with home, health check endpoints, and WebSocket support.",
             version="1.0.0",
+            ws_ping_interval=30,
+            ws_ping_timeout=60
         )
         self.include_routes()
         self.client = OpenaiClient()
