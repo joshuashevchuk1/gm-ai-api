@@ -3,7 +3,6 @@ import json
 import logging
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from src.handlers.text import handle_text_message
-from src.handlers.audio import handle_audio_message
 from src.clients.openai import OpenaiClient
 
 router = APIRouter()
@@ -28,8 +27,6 @@ async def websocket_handler(websocket: WebSocket):
                 # Handle different types of messages
                 if msg_type == "text":
                     response = await handle_text_message(data, client)  # Process text messages
-                elif msg_type in ("audio-buffer", "audio-file"):
-                    response = await handle_audio_message(data, client)  # Process audio messages
                 else:
                     response = json.dumps({"error": "Unrecognized message type"})  # Handle unrecognized types
 
