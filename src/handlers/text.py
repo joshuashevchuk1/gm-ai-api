@@ -5,7 +5,7 @@ import json
 
 async def handle_text_message(message, meet_key, client):
 
-    response_text = await client.text_chat(text=message, session_id=meet_key)
+    response_text = await client.text_chat(text=message, meet_key=meet_key)
 
     return json.dumps({
         "type": "response",
