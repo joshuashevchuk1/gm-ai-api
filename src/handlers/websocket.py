@@ -22,11 +22,12 @@ async def websocket_handler(websocket: WebSocket):
 
                 message = json.loads(raw)  # Parse the incoming JSON message
                 msg_type = message.get("type")  # Get the message type
+                meet_key = message.get("meet_key")
                 data = message.get("data")  # Get the data payload
 
                 # Handle different types of messages
                 if msg_type == "text":
-                    response = await handle_text_message(data, client)  # Process text messages
+                    response = await handle_text_message(data, meet_key, client)  # Process text messages
                 else:
                     response = json.dumps({"error": "Unrecognized message type"})  # Handle unrecognized types
 
