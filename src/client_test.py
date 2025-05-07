@@ -8,10 +8,11 @@ async def client():
     async with websockets.connect(uri) as websocket:
         while True:
             msg_type = input("Enter message type (text/audio-buffer/audio-file): ").strip().lower()
+            meet_key = "12345"
 
             if msg_type == "text":
                 msg = input("You: ")
-                message = json.dumps({"type": "text", "data": msg})
+                message = json.dumps({"type": "text","meet_key": meet_key, "message": msg})
             elif msg_type == "audio-buffer":
                 audio_data = input("Enter audio buffer data (base64 encoded): ").strip()
                 message = json.dumps({"type": "audio-buffer", "data": audio_data})
