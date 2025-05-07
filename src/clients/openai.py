@@ -1,5 +1,16 @@
 from typing import BinaryIO
 from openai import OpenAI
+import requests
+
+def _get_transcript(meet_key):
+    url = f"http://localhost:8000/document/{meet_key}"
+    headers = {
+        "accept": "application/json",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get(url, headers=headers)
+    return response
 
 class OpenaiClient:
     def __init__(self):
@@ -56,6 +67,7 @@ class OpenaiClient:
         }]
 
         transcript = None
+
 
         messages.append({
             "role": "user",
