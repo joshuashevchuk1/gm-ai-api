@@ -3,16 +3,19 @@ import websockets
 import json
 import base64
 
+
 async def client():
     uri = "ws://localhost:8000/ws"
-    async with websockets.connect(uri) as websocket:
+
+    # Set ping_interval and ping_timeout to extend connection tolerance
+    async with websockets.connect(uri, ping_interval=60000, ping_timeout=60000) as websocket:
         while True:
             msg_type = input("Enter message type (text/audio-buffer/audio-file): ").strip().lower()
             meet_key = "12345"
 
             if msg_type == "text":
                 msg = input("You: ")
-                message = json.dumps({"type": "text","meet_key": meet_key, "message": msg})
+                message = json.dumps({"type": "text", "meet_key": meet_key, "message": msg})
             elif msg_type == "audio-buffer":
                 audio_data = input("Enter audio buffer data (base64 encoded): ").strip()
                 message = json.dumps({"type": "audio-buffer", "data": audio_data})
@@ -39,6 +42,7 @@ async def client():
             except websockets.exceptions.ConnectionClosed as e:
                 print(f"Connection closed: {e}")
                 break
+
 
 if __name__ == "__main__":
     asyncio.run(client())
