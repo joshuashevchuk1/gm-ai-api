@@ -3,12 +3,11 @@ import json
 
 
 
-async def handle_text_message(message, meet_key, client):
+async def handle_text_message(message, client):
 
-    response_text = await client.text_chat(text=message, meet_key=meet_key)
+    response_text = await client.text_chat(text=message)
 
     return json.dumps({
         "type": "response",
         "data": response_text,
-        "session_id": meet_key
     })

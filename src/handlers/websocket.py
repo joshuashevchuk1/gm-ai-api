@@ -6,14 +6,14 @@ from src.handlers.text import handle_text_message
 from src.clients.openai import OpenaiClient
 
 router = APIRouter()
-
 logging.basicConfig(level=logging.INFO)
 
-client = OpenaiClient()
-
-@router.websocket("/ws")
-async def websocket_handler(websocket: WebSocket):
+@router.websocket("/ws:{meet_key}")
+async def websocket_handler(websocket: WebSocket, meet_key: str):
     await websocket.accept()  # Accept the WebSocket connection
+    client = OpenaiClient()
+    client.meet_key = meet_key
+    client.init_messages() # Accept the WebSocket connection
     try:
         while True:
             try:
@@ -27,7 +27,7 @@ async def websocket_handler(websocket: WebSocket):
 
                 # Handle different types of messages
                 if msg_type == "text":
-                    response = await handle_text_message(data, meet_key, client)  # Process text messages
+                    response = await handle_text_message(data, client)  # Process text messages
                 else:
                     response = json.dumps({"error": "Unrecognized message type"})  # Handle unrecognized types
 
