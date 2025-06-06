@@ -1,9 +1,11 @@
 import requests
+from src.config import config
 from openai import OpenAI
 
 class OpenaiClient:
     def __init__(self):
         self.client = OpenAI()
+        self.config = config.Config()
         self.messages = []
         self.meet_key = None
 

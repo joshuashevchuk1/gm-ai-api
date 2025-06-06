@@ -22,7 +22,6 @@ async def websocket_handler(websocket: WebSocket, meet_key: str):
 
                 message = json.loads(raw)  # Parse the incoming JSON message
                 msg_type = message.get("type")  # Get the message type
-                meet_key = message.get("meet_key")
                 data = message.get("message")  # Get the data payload
 
                 # Handle different types of messages
