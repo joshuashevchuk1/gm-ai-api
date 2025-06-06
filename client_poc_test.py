@@ -5,7 +5,8 @@ import base64
 
 
 async def client():
-    uri = "ws://localhost:8000/ws"
+    meet_key = input("Enter meet key: ")  # Prompt user for input
+    uri = f"ws://localhost:8000/ws/{meet_key}"
 
     # Set ping_interval and ping_timeout to extend connection tolerance
     async with websockets.connect(uri, ping_interval=60000, ping_timeout=60000) as websocket:
