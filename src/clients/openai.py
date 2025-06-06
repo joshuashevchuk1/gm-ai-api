@@ -34,7 +34,7 @@ class OpenaiClient:
             })
 
     def _get_transcript(self,meet_key):
-        url = f"http://localhost:8000/document/{meet_key}/transcript"
+        url = f"http://{self.config.get_base_host()}:{self.config.get_base_port()}/document/{meet_key}/transcript"
         headers = {
             "accept": "application/json",
             "Content-Type": "application/json"

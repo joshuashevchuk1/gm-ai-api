@@ -7,5 +7,5 @@ class Config:
     def get_base_host(self):
         return self.base_host
 
-    def get_base_post(self):
+    def get_base_port(self):
         return self.base_port
