@@ -12,6 +12,7 @@ ENV PYTHONPATH=/data/src:$PYTHONPATH
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade google-api-python-client google-auth google-auth-oauthlib google-auth-httplib2
 
 # Expose your app's port
 EXPOSE 8000
