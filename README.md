@@ -13,3 +13,8 @@ docker run -d -p 8020:8020 gm-ai-api
 
 Once a meet key has been established and a session properly introduced,
 a new websocket connection can be made with /ws:{meet_key}
+
+contributors:
+-josh shevchuck
+-michael baart
+-george spake
