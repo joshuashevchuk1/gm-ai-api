@@ -4,5 +4,5 @@ from .home import router as home
 from .health import router as health
 from .websocket import router as websocket
 
-routers = [home,health]
+routers = [home,health,websocket]
 websocket_route = websocket

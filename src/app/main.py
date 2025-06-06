@@ -2,6 +2,7 @@ import uvicorn
 import logging
 
 from src.clients.openai import OpenaiClient
+from src.config.config import Config
 from src.handlers import routers,websocket_route
 
 from fastapi import FastAPI
@@ -10,8 +11,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 class GmAiApp:
-    def __init__(self, port: int):
-        self.port = port
+    def __init__(self):
         self.app = FastAPI(
             title="GM Base API",
             description="A modular FastAPI app with home, health check endpoints, and WebSocket support.",
@@ -21,6 +21,8 @@ class GmAiApp:
         )
         self.include_routes()
         self.client = OpenaiClient()
+        self.config = Config()
+        self.port = self.config.get_ai_port()
 
     def include_routes(self):
         for route in routers:
@@ -34,5 +36,5 @@ class GmAiApp:
 
 
 if __name__ == "__main__":
-    app = GmAiApp(port=8000)
+    app = GmAiApp()
     app.run_server()
